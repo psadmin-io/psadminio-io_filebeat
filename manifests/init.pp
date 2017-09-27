@@ -3,13 +3,13 @@ class io_filebeat (
   $psft_install_user_name    = hiera('psft_install_user_name', undef),
   $oracle_install_group_name = hiera('oracle_install_group_name', undef),
   $domain_user               = hiera('domain_user', undef),
-  $pia_domain_list           = hiera_hash('pia_domain_list'),
-  $appserver_domain_list     = hiera_hash('appserver_domain_list'),
-  $prcs_domain_list          = hiera_hash('prcs_domain_list'),
-  $web_logs                  = undef,
-  $access_logs               = undef,
-  $app_logs                  = undef,
-  $prcs_logs                 = undef,
+  $pia_domain_list           = hiera_hash('pia_domain_list', undef),
+  $appserver_domain_list     = hiera_hash('appserver_domain_list', undef),
+  $prcs_domain_list          = hiera_hash('prcs_domain_list', undef),
+  $weblogic                  = false,
+  $access_logs               = false,
+  $app_logs                  = false,
+  $prcs_logs                 = false,
   $fields                    = undef,
 ) {
 
@@ -32,7 +32,8 @@ class io_filebeat (
     }
   }
 
-if ($io_filebeat::web_logs != undef) {
-  contain ::io_filebeat::web_logs
-}
+  if ($weblogic) {
+    contain ::io_filebeat::weblogic
+  }
 
+}
