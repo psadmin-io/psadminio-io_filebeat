@@ -43,7 +43,19 @@ The very basic steps needed for a user to get the module up and running. This ca
 
 ## Usage
 
-This section is where you describe how to customize, configure, and do the fancy stuff with your module here. It's especially helpful if you include usage examples and code samples for doing things with your module.
+```yaml
+io_filebeat::major_version: '5'
+io_filebeat::config_dir: 'C:/Program Files/filebeat/conf.d'
+io_filebeat::weblogic: true
+io_filebeat::pia_access: true
+io_filebeat::fields:
+  region: "%{hiera('region')}"
+  server_type: "%{hiera('server_type')}"
+io_filebeat::output:
+  logstash:
+    hosts:
+      - elk.psadmin.io:5044
+```
 
 ## Reference
 
