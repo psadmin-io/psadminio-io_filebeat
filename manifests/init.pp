@@ -10,9 +10,8 @@ class io_filebeat (
   $major_version              = '5.4.0',
   $weblogic                  = false,
   $pia_access                = false,
-  $access_logs               = false,
-  $app_logs                  = false,
-  $prcs_logs                 = false,
+  $appserver                 = false,
+  $prcs                      = false,
   $fields                    = undef,
   $output                    = undef,
 ) {
@@ -49,6 +48,9 @@ class io_filebeat (
   }
   if ($pia_access) {
     contain ::io_filebeat::pia_access
+  }
+  if ($appserver) {
+    contain ::io_filebeat::appserver
   }
 
 }
