@@ -44,11 +44,17 @@ The very basic steps needed for a user to get the module up and running. This ca
 ## Usage
 
 ```yaml
-io_filebeat::web_logs: true
+io_filebeat::major_version: '5'
+io_filebeat::config_dir: 'C:/Program Files/filebeat/conf.d'
+io_filebeat::weblogic: true
+io_filebeat::pia_access: true
 io_filebeat::fields:
   region: "%{hiera('region')}"
   server_type: "%{hiera('server_type')}"
-  
+io_filebeat::output:
+  logstash:
+    hosts:
+      - elk.psadmin.io:5044
 ```
 
 ## Reference
