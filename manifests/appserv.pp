@@ -7,7 +7,7 @@ class io_filebeat::appserv (
   $appserver_domain_list.each |$domain_name, $appserv_domain_info| {
     filebeat::prospector {"${domain_name}-appserv":
       paths             => [
-        "${pia_domain_info['ps_cfg_home_dir']}/files/LOGS/APPSRV_*.LOG",
+        "${appserv_domain_info['ps_cfg_home_dir']}/files/LOGS/APPSRV_*.LOG",
       ],
       doc_type          => 'appsrv_log',
       input_type        => 'log',

@@ -9,7 +9,7 @@ class io_filebeat (
   $major_version              = '6.4.2',
   $weblogic                  = false,
   $pia_access                = false,
-  $app_logs                  = false,
+  $appserv                   = false,
   $prcs_logs                 = false,
   $fields                    = undef,
   $output                    = undef,
