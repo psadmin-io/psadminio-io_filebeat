@@ -42,6 +42,7 @@ class io_filebeat (
     config_dir     => $config_dir,
     major_version  => $major_version,
     outputs        => $output,
+    purge_conf_dir => false,
   }
 
   if ($weblogic) {
