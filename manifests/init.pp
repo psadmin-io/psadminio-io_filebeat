@@ -13,6 +13,7 @@ class io_filebeat (
   $prcs_logs                 = false,
   $fields                    = undef,
   $output                    = undef,
+  $exclude_lines             = undef,
 ) {
 
   # contain ::filebeat
