@@ -13,7 +13,7 @@ class io_filebeat::appserv (
       input_type        => 'log',
       # ignore_older      => '24h',
       fields_under_root => true,
-      tail_files        => true,
+      tail_files        => true
       fields            => $fields,
     }
   }
