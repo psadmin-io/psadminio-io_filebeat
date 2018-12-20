@@ -5,7 +5,7 @@ class io_filebeat::pia_access (
   $exclude_lines   = $io_filebeat::exclude_lines,
 ) inherits io_filebeat {
 
-  if ($exclude_lines = undef) { $exclude_lines = '[]' }
+  # if ($exclude_lines = undef) { $exclude_lines = '[]' }
 
   $pia_domain_list.each |$domain_name, $pia_domain_info| {
     filebeat::prospector {"${domain_name}-pia-access":
