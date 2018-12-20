@@ -1,0 +1,35 @@
+class io_filebeat::appserver (
+  $ensure          = $io_filebeat::ensure,
+  $appserver_domain_list = $io_filebeat::appserver_domain_list,
+  $fields          = $io_filebeat::fields,
+  $ps_filedir      = $io_filebeat::ps_filedir,
+) inherits io_filebeat {
+
+  $appserver_domain_list.each |$domain_name, $appserv_domain_info| {
+
+    if ($ps_filedir) {
+      $appsrv_logs = "${ps_filedir}/LOGS/APPSRV_*.LOG"
+    } else {
+      $appsrv_logs = "${appserv_domain_info['ps_cfg_home_dir']}/appserv/${domain_name}/LOGS/APPSRV_*.LOG"
+    }
+
+    filebeat::prospector {"${domain_name}-appsrv":
+      paths             => [
+        $appsrv_logs,
+      ],
+      doc_type          => 'appsrv_log',
+      input_type        => 'log',
+      ignore_older      => '24h',
+      fields_under_root => true,
+      tail_files        => true,
+      # multiline         => {
+      #   pattern => "^####",
+      #   negate => true,
+      #   what => "previous",
+      #   match => "after",
+      # },
+      fields            => $fields,
+    }
+  }
+
+}
