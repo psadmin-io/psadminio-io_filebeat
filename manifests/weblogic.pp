@@ -1,7 +1,7 @@
 class io_filebeat::weblogic (
   $ensure          = $io_filebeat::ensure,
   $pia_domain_list = $io_filebeat::pia_domain_list,
-  # $fields          = $io_filebeat::fields,
+  $fields          = $io_filebeat::fields,
 ) inherits io_filebeat {
 
   $pia_domain_list.each |$domain_name, $pia_domain_info| {
@@ -20,7 +20,7 @@ class io_filebeat::weblogic (
         what => "previous",
         match => "after",
       },
-      # fields            => $fields,
+      fields            => $fields,
     }
   }
 
