@@ -9,7 +9,10 @@ class io_filebeat (
   $major_version              = '6.4.2',
   $weblogic                  = false,
   $pia_access                = false,
+  $pia_servlet               = false,
   $appserv                   = false,
+  $gh_activity               = false,
+  $gh_unmask                 = false,
   $prcs_logs                 = false,
   $fields                    = undef,
   $output                    = undef,
@@ -51,10 +54,15 @@ class io_filebeat (
   }
   if ($pia_access) {
     contain ::io_filebeat::pia_access
+  }  
+  if ($pia_servlet) {
+    contain ::io_filebeat::pia_servlet
   }
-
-  if ($appserv) {
-    contain ::io_filebeat::appserv
+  if ($gh_activity) {
+    contain ::io_filebeat::gh_activity
+  }
+  if ($gh_unmask) {
+    contain ::io_filebeat::gh_unmask
   }
 
 }
