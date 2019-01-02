@@ -58,6 +58,9 @@ class io_filebeat (
   if ($pia_servlet) {
     contain ::io_filebeat::pia_servlet
   }
+  if ($appserv) {
+    contain ::io_filebeat::appserv
+  }
   if ($gh_activity) {
     contain ::io_filebeat::gh_activity
   }
