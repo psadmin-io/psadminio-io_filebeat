@@ -6,22 +6,16 @@ class io_filebeat (
   $pia_domain_list           = hiera_hash('pia_domain_list', undef),
   $appserver_domain_list     = hiera_hash('appserver_domain_list', undef),
   $prcs_domain_list          = hiera_hash('prcs_domain_list', undef),
-  $major_version              = '6.4.2',
+  $major_version             = '7',
   $weblogic                  = false,
   $pia_access                = false,
-  $appserv                   = false,
+  $appserver                 = false,
   $prcs_logs                 = false,
 
   $fields                    = undef,
   $output                    = undef,
   $exclude_lines             = '[]',
 ) {
-
-  # contain ::filebeat
-
-  # if $pia_domain_list { validate_hash($pia_domain_list) }
-  # if $appserver_domain_list { validate_hash($appserver_domain_list) }
-  # if $prcs_domain_list { validate_hash($prcs_domain_list) }
 
   case $::osfamily {
     'windows': {
@@ -36,11 +30,11 @@ class io_filebeat (
     }
     default: {
       $fileowner       = $psft_install_user_name
-      $config_dir      = '/opt/filebeat/conf.d'
+      $config_dir      = '/etc/filebeat/conf.d'
     }
   }
 
-  class { 'filebeat': 
+  class { 'filebeat':
     config_dir     => $config_dir,
     major_version  => $major_version,
     outputs        => $output,
@@ -55,10 +49,6 @@ class io_filebeat (
   }
   if ($appserver) {
     contain ::io_filebeat::appserver
-  }
-
-  if ($appserv) {
-    contain ::io_filebeat::appserv
   }
 
 }

@@ -48,6 +48,7 @@ io_filebeat::major_version: '5'
 io_filebeat::config_dir: 'C:/Program Files/filebeat/conf.d'
 io_filebeat::weblogic: true
 io_filebeat::pia_access: true
+io_filebeat::exclude_lines: []
 io_filebeat::fields:
   region: "%{hiera('region')}"
   server_type: "%{hiera('server_type')}"

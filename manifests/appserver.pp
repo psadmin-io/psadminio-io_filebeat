@@ -13,7 +13,7 @@ class io_filebeat::appserver (
       $appsrv_logs = "${appserv_domain_info['ps_cfg_home_dir']}/appserv/${domain_name}/LOGS/APPSRV_*.LOG"
     }
 
-    filebeat::prospector {"${domain_name}-appsrv":
+    filebeat::input {"${domain_name}-appsrv":
       paths             => [
         $appsrv_logs,
       ],
@@ -22,12 +22,6 @@ class io_filebeat::appserver (
       ignore_older      => '24h',
       fields_under_root => true,
       tail_files        => true,
-      # multiline         => {
-      #   pattern => "^####",
-      #   negate => true,
-      #   what => "previous",
-      #   match => "after",
-      # },
       fields            => $fields,
     }
   }
