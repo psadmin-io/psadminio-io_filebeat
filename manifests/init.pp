@@ -14,7 +14,7 @@ class io_filebeat (
 
   $fields                    = undef,
   $output                    = undef,
-  $exclude_lines             = '[]',
+  $exclude_lines             = [],
 ) {
 
   case $::osfamily {

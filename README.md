@@ -44,10 +44,11 @@ The very basic steps needed for a user to get the module up and running. This ca
 ## Usage
 
 ```yaml
-io_filebeat::major_version: '5'
+io_filebeat::major_version: '7'
 io_filebeat::config_dir: 'C:/Program Files/filebeat/conf.d'
-io_filebeat::weblogic: true
+io_filebeat::weblogic:   true
 io_filebeat::pia_access: true
+io_filebeat::appserver:  true
 io_filebeat::exclude_lines: []
 io_filebeat::fields:
   region: "%{hiera('region')}"

@@ -5,6 +5,10 @@ class io_filebeat::appserver (
   $ps_filedir      = $io_filebeat::ps_filedir,
 ) inherits io_filebeat {
 
+  $log_source = {
+    'log_source' => 'appsrv_log'
+  }
+
   $appserver_domain_list.each |$domain_name, $appserv_domain_info| {
 
     if ($ps_filedir) {
@@ -17,12 +21,12 @@ class io_filebeat::appserver (
       paths             => [
         $appsrv_logs,
       ],
-      doc_type          => 'appsrv_log',
+      # doc_type          => 'log',
       input_type        => 'log',
       ignore_older      => '24h',
       fields_under_root => true,
       tail_files        => true,
-      fields            => $fields,
+      fields            => merge($log_source, $fields),
     }
   }
 
