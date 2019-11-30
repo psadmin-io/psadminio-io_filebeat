@@ -17,6 +17,12 @@ class io_filebeat::servlet (
       ignore_older      => '24h',
       fields_under_root => true,
       tail_files        => true,
+      multiline         => {
+        pattern => '^\t',
+        negate  => true,
+        what    => 'previous',
+        match   => 'after',
+      },
       fields            => merge($log_source, $fields),
     }
   }
