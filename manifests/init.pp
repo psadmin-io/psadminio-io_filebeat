@@ -11,6 +11,7 @@ class io_filebeat (
   $pia_access                = false,
   $appserver                 = false,
   $prcs_logs                 = false,
+  $servlet                   = false,
 
   $fields                    = undef,
   $output                    = undef,
@@ -46,6 +47,9 @@ class io_filebeat (
   }
   if ($pia_access) {
     contain ::io_filebeat::pia_access
+  }
+  if ($servlet) {
+    contain ::io_filebeat::servlet
   }
   if ($appserver) {
     contain ::io_filebeat::appserver

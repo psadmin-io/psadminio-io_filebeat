@@ -13,7 +13,6 @@ class io_filebeat::weblogic (
       paths             => [
         "${pia_domain_info['ps_cfg_home_dir']}/webserv/${domain_name}/servers/PIA/logs/PIA_weblogic.log",
       ],
-      # doc_type          => 'weblogic_log',
       input_type        => 'log',
       ignore_older      => '24h',
       fields_under_root => true,

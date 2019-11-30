@@ -21,7 +21,6 @@ class io_filebeat::appserver (
       paths             => [
         $appsrv_logs,
       ],
-      # doc_type          => 'log',
       input_type        => 'log',
       ignore_older      => '24h',
       fields_under_root => true,
