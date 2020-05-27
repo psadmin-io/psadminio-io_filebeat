@@ -6,16 +6,19 @@ class io_filebeat (
   $pia_domain_list           = hiera_hash('pia_domain_list', undef),
   $appserver_domain_list     = hiera_hash('appserver_domain_list', undef),
   $prcs_domain_list          = hiera_hash('prcs_domain_list', undef),
-  $major_version             = '7',
+  $major_version              = '7.6.1',
   $weblogic                  = false,
   $pia_access                = false,
-  $appserver                 = false,
+  $pia_servlet               = false,
+  $appserv                   = false,
+  $gh_activity               = false,
+  $gh_unmask                 = false,
   $prcs_logs                 = false,
   $servlet                   = false,
 
   $fields                    = undef,
   $output                    = undef,
-  $exclude_lines             = [],
+  $exclude_lines             = '[]',
 ) {
 
   case $::osfamily {
@@ -31,7 +34,7 @@ class io_filebeat (
     }
     default: {
       $fileowner       = $psft_install_user_name
-      $config_dir      = '/etc/filebeat/conf.d'
+      $config_dir      = '/opt/filebeat/conf.d'
     }
   }
 
@@ -48,11 +51,17 @@ class io_filebeat (
   if ($pia_access) {
     contain ::io_filebeat::pia_access
   }
-  if ($servlet) {
-    contain ::io_filebeat::servlet
+  if ($pia_servlet) {
+    contain ::io_filebeat::pia_servlet
   }
-  if ($appserver) {
-    contain ::io_filebeat::appserver
+  if ($appserv) {
+    contain ::io_filebeat::appserv
+  }
+  if ($gh_activity) {
+    contain ::io_filebeat::gh_activity
+  }
+  if ($gh_unmask) {
+    contain ::io_filebeat::gh_unmask
   }
 
 }

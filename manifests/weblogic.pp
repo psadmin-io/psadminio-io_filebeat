@@ -4,9 +4,7 @@ class io_filebeat::weblogic (
   $fields          = $io_filebeat::fields,
 ) inherits io_filebeat {
 
-  $log_source = {
-    'log_source' => 'weblogic'
-  }
+  $log_type = { 'log_type' => 'weblogic_log' }
 
   $pia_domain_list.each |$domain_name, $pia_domain_info| {
     filebeat::input {"${domain_name}-weblogic":
@@ -23,7 +21,7 @@ class io_filebeat::weblogic (
         what    => 'previous',
         match   => 'after',
       },
-      fields            => merge($log_source, $fields),
+      fields            => $fields+$log_type,
     }
   }
 
